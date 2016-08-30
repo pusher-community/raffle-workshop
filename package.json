@@ -1,0 +1,22 @@
+{
+  "name": "raffle-workshop",
+  "version": "1.0.0",
+  "description": "A workshop where we build a raffle frontend",
+  "main": "index.js",
+  "scripts": {
+    "start": "node backend"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pusher-community/raffle-workshop.git"
+  },
+  "author": "Ben Foxall (@benjaminbenben)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/pusher-community/raffle-workshop/issues"
+  },
+  "homepage": "https://github.com/pusher-community/raffle-workshop#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
