@@ -16,7 +16,7 @@ In this section we send messages out from our backend server to some static page
 
 ### Hello World 
 
-Update the
+Update the example to display text in the header
 
 * subscribe to `workshop` channel
 * bind to `name` event
@@ -49,9 +49,9 @@ Update the
 
 🚀 `…keyboard.js workshop note`
 
-## Seeing who is connected - presence.html
+## Seeing who is connected - _presence.html_
 
-For the raffle, we’ll need to see who is connected so that we can pick a winner.  For this we need to use authenticated channels.
+For the raffle, we’ll need to see who is connected so that we can pick a winner.  For this we need to use presence channels, which allows users to be authenticated.
 
 ### Seeing members
 
@@ -63,13 +63,17 @@ For the raffle, we’ll need to see who is connected so that we can pick a winne
 
 * bind callback to `winner`
 * if set hasWon to data==myID
-    * set background to `hasWon ? ’green’ : ’blue’`
+    * set background to `hasWon ? ’green’ : ’white’`
     * include tone.js (as above) & play `…ease(hasWon?’G5’:’G2’, ‘6n’)`
 
 🚀 `…/pick.js presence-workshop winner`
 
 
-## (bonus) client events
+## (bonus) client events – _client-events.html_
+
+Another feature of presence/private channels are client-events.
+
+[this](http://www.purplehumpbackwhale.com/wp-content/uploads/2012/04/pianokeyboardnotes.jpg) should be useful.
 
 
 
