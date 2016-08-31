@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pusher Broadcast</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {font-family: sans-serif}
+      h1,h2,h3,h4,h5,h5{font-weight: 100}
+      .me{background-color: aquamarine}
+      input {font-size: 4em}
+      button {
+        width: 100%;
+        height: 50vh;
+        display: block;
+        background: #ccc
+      }
+    </style>
+  </head>
+  <body>
+
+
+    <input type="text" id="note" value="" size="4">
+    <button id="button">play</button>
+
+
+    <script src="https://tonejs.github.io/CDN/latest/Tone.min.js"></script>
+    <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+    <script>
+
+      var note = sessionStorage.getItem('_note') || 'C4'
+
+      document.getElementById('note').value = note
+      document.getElementById('note').addEventListener('change', function(){
+        sessionStorage.setItem('_note', this.value)
+      })
+
+      var synth = new Tone.Synth().toMaster()
+
+      var pusher = new Pusher('de8c4e21a71185ae11db', {
+        cluster: 'eu',
+        encrypted: true,
+        authEndpoint: 'https://raffle-workshop.herokuapp.com/pusher/auth'
+      })
+
+      var channel = pusher.subscribe('presence-workshop')
+
+      // document.addEventListener('keypress', play, false)
+      button.addEventListener('touchstart', play, false)
+      button.addEventListener('mousedown', play, false)
+
+      function play(e){
+        e.preventDefault()
+        var note = document.getElementById('note').value
+        channel.trigger('client-note', note)
+        synth.triggerAttackRelease(note, "8n")
+      }
+
+      channel.bind('client-note', function(note){
+        console.log("NOTE", note)
+      })
+
+    </script>
+  </body>
+</html>

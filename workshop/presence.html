@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Pusher Broadcast</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+      body {font-family: sans-serif}
+      h1,h2,h3,h4,h5,h5{font-weight: 100}
+      .me{background-color: aquamarine}
+    </style>
+  </head>
+  <body>
+
+    <h1 id="hello">Presence.html</h1>
+
+    <ul id="members"></ul>
+
+    <script src="https://js.pusher.com/3.2/pusher.min.js"></script>
+    <script>
+
+      var pusher = new Pusher('de8c4e21a71185ae11db', {
+        cluster: 'eu',
+        encrypted: true,
+        authEndpoint: 'https://raffle-workshop.herokuapp.com/pusher/auth'
+      })
+
+      var channel = pusher.subscribe('presence-workshop')
+
+      channel.bind('pusher:subscription_succeeded', render)
+
+      channel.bind('pusher:member_added', render)
+
+      channel.bind('pusher:member_removed', render)
+
+      function render(){
+        if(!channel.members) return console.log('no members on channel')
+
+        // get the data from the channel
+        var members = channel.members
+        var myID = channel.members.myID
+
+        // clear out the list of members
+        var list = document.getElementById('members')
+        list.innerHTML = ''
+
+        // append each of the members
+        members.each(function(member){
+          var li = document.createElement('li')
+          li.innerText = member.id
+          list.appendChild(li)
+
+          if(myID == member.id) {
+            li.setAttribute('class', 'me')
+          }
+        })
+      }
+
+    </script>
+  </body>
+</html>
