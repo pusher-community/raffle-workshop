@@ -4,7 +4,7 @@
   "description": "A workshop where we build a raffle frontend",
   "main": "index.js",
   "scripts": {
-    "start": "node backend"
+    "start": "node backend/auth-server.js"
   },
   "repository": {
     "type": "git",
